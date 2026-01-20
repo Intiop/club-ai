@@ -1,0 +1,51 @@
+<script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.20/libs/cn/index.js"></script>
+
+<style>
+  html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden; /* 隐藏多余滚动条 */
+    background-color: transparent; /* 让背景透明 */
+  }
+</style>
+
+<script>
+  // 3. 您的真实密钥 (已嵌入，请勿泄露)
+  const MY_TOKEN = 'pat_BBo3PhxyitjZ3cgOLbBsy39ukwkTvcshSUDR5bX7REVUpdIvz0cYiqs2IPSyyylg';
+  
+  // 4. 初始化机器人
+  new CozeWebSDK.WebChatClient({
+    config: {
+      bot_id: '7596294688979075091', // 您的 Bot ID
+    },
+    
+    // 5. 界面设置 (针对 Notion 侧边栏优化)
+    componentProps: {
+      title: 'CPSA社团智能助手', // 聊天框顶部标题
+      layout: 'pc',            // 布局模式 (PC模式在网页端更稳定)
+      lang: 'zh-CN',           // 强制中文界面
+    },
+
+    // 6. 鉴权配置
+    auth: {
+      type: 'token',
+      token: MY_TOKEN,
+      onRefreshToken: async () => MY_TOKEN 
+    },
+    
+    // 7. UI 细节优化
+    ui: {
+      base: {
+        zIndex: 1000,
+      },
+      // 如果您希望它像一个全屏应用一样嵌入，而不是悬浮球，可以把下面这段开启
+      // asstBtn: {
+      //   isNeed: false, // 设为 false 则隐藏右下角圆球，直接显示聊天框
+      // },
+      footer: {
+        isShow: false, // 隐藏底部 "Powered by Coze" 版权信息，节省空间
+      }
+    }
+  });
+</script>
