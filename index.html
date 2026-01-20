@@ -2,31 +2,22 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPSA AI</title>
     <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.20/libs/cn/index.js"></script>
     <style>
-        /* ⚠️ 给背景加个浅蓝色，证明网页没挂 */
-        body { 
-            background-color: #e6f7ff; 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh;
-            font-family: sans-serif;
-        }
-        .loading-text {
-            color: #0050b3;
-            text-align: center;
+        /* 1. 强制铺满全屏，不留空隙 */
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* 禁止网页出现双重滚动条 */
+            background-color: transparent; /* 背景透明，完美融入 Notion */
         }
     </style>
 </head>
 <body>
-    <div class="loading-text">
-        <h2>✅ 网页加载成功！</h2>
-        <p>如果右下角没有蓝色圆球，请检查 Coze 白名单。</p>
-    </div>
-
     <script>
         const MY_TOKEN = 'pat_BBo3PhxyitjZ3cgOLbBsy39ukwkTvcshSUDR5bX7REVUpdIvz0cYiqs2IPSyyylg';
         
@@ -36,11 +27,19 @@
             },
             componentProps: {
                 title: 'CPSA社团助手',
+                layout: 'pc',  // ⚠️ 关键：开启电脑全屏模式
+                lang: 'zh-CN',
             },
             auth: {
                 type: 'token',
                 token: MY_TOKEN,
                 onRefreshToken: async () => MY_TOKEN 
+            },
+            ui: {
+                // 隐藏底部的 "Powered by Coze" 字样，更干净
+                footer: {
+                    isShow: false 
+                }
             }
         });
     </script>
